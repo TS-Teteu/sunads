@@ -1,12 +1,8 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 
-export const {
-  handlers: { GET, POST },
-  auth,
-  signIn,
-  signOut,
-} = NextAuth({
+/* --- 1. Configurações do NextAuth --- */
+export const authOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -15,23 +11,19 @@ export const {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        // Esta é uma validação SIMULADA.
-        // Em um ambiente de produção, você faria uma consulta ao seu banco de dados
-        // para verificar as credenciais do usuário de forma segura.
+        // Validação SIMULADA
         if (credentials?.email === "test@example.com" && credentials?.password === "password123") {
-          // Retorne um objeto de usuário. O ID é obrigatório.
           return { id: "1", name: "Test User", email: "test@example.com" }
         }
-        // Se as credenciais forem inválidas, retorne null
         return null
       },
     }),
   ],
   pages: {
-    signIn: "/login", // Redireciona para a sua página de login personalizada
+    signIn: "/login",
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user }: { token: any; user: any }) {
       if (user) {
         token.id = user.id
         token.email = user.email
@@ -39,7 +31,7 @@ export const {
       }
       return token
     },
-    async session({ session, token }) {
+    async session({ session, token }: { session: any; token: any }) {
       session.user.id = token.id
       session.user.email = token.email
       session.user.name = token.name
@@ -47,4 +39,19 @@ export const {
     },
   },
   secret: process.env.NEXTAUTH_SECRET,
-})
+} as const
+
+/* --- 2. Inicializa o NextAuth --- */
+const nextAuth = NextAuth(authOptions)
+
+/*
+ *  nextAuth retorna:
+ *  {
+ *    handlers: { GET, POST },
+ *    auth,    // helper server-side
+ *    signIn,  // helper client/server
+ *    signOut, // helper client/server
+ *  }
+ */
+export const { handlers, auth, signIn, signOut } = nextAuth
+export const { GET, POST } = handlers
