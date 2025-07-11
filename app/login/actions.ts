@@ -13,7 +13,7 @@ export async function login(formData: FormData) {
   const password = formData.get("password") as string
 
   // Simulação de validação de usuário
-  if (email === "test@example.com" && password === "password123") {
+  if (email === "mateus@sunads.com.br" && password === "Mateu$2850") {
     session.isLoggedIn = true
     session.email = email
     await session.save()

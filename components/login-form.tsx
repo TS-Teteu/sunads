@@ -7,7 +7,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import Image from "next/image"
 import { login } from "@/app/login/actions"
 
 export function LoginForm() {
@@ -33,7 +32,17 @@ export function LoginForm() {
     <Card className="w-full max-w-md">
       <CardHeader className="space-y-1 text-center">
         <div className="flex flex-col items-center justify-center space-y-2">
-          <Image src="/images/sunads-logo.png" alt="Sun Ads Logo" width={200} height={60} className="h-auto w-auto" />
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-red-500 rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-xl">S</span>
+            </div>
+            <div className="text-left">
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+                Sun Ads
+              </h1>
+              <p className="text-xs text-muted-foreground">Digital Marketing</p>
+            </div>
+          </div>
           <CardTitle>Acessar Painel</CardTitle>
           <CardDescription>Entre com seu e-mail e senha para acessar</CardDescription>
         </div>
