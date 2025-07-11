@@ -8,8 +8,8 @@ import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { login } from "@/lib/auth" // Importa a função de login simulada
 import Image from "next/image"
+import { signIn } from "next-auth/react" // Importa a função signIn do NextAuth.js
 
 export function LoginForm() {
   const [email, setEmail] = useState("")
@@ -17,14 +17,21 @@ export function LoginForm() {
   const [error, setError] = useState("")
   const router = useRouter()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError("")
 
-    if (login(email, password)) {
-      router.push("/") // Redireciona para o dashboard após o login
-    } else {
+    const result = await signIn("credentials", {
+      redirect: false, // Não redireciona automaticamente, vamos lidar com isso manualmente
+      email,
+      password,
+      callbackUrl: "/", // URL para onde redirecionar após o login bem-sucedido
+    })
+
+    if (result?.error) {
       setError("Credenciais inválidas. Tente 'test@example.com' e 'password123'.")
+    } else {
+      router.push("/") // Redireciona para o dashboard após o login
     }
   }
 
@@ -33,7 +40,7 @@ export function LoginForm() {
       <CardHeader className="space-y-1 text-center">
         <div className="flex flex-col items-center justify-center space-y-2">
           <Image src="/images/sunads-logo.png" alt="Sun Ads Logo" width={200} height={60} className="h-auto w-auto" />
-          <CardDescription>Entre com seu e-mail e senha para acessar o Sun Ads</CardDescription>
+          <CardDescription>Entre com seu e-mail e senha para acessar</CardDescription>
         </div>
       </CardHeader>
       <CardContent>
