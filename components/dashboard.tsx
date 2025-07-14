@@ -1,8 +1,6 @@
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { DashboardCharts } from "@/components/dashboard-charts"
-import { RecentActivity } from "@/components/recent-activity"
 import { DollarSign, CheckSquare, TrendingUp, Users, FolderOpen, AlertTriangle } from "lucide-react"
 
 export default function Dashboard() {
@@ -21,8 +19,8 @@ export default function Dashboard() {
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">R$ 245.890</div>
-            <p className="text-xs text-muted-foreground">+12.5% em relação ao mês anterior</p>
+            <div className="text-2xl font-bold">R$ 0</div>
+            <p className="text-xs text-muted-foreground">Aguardando dados</p>
           </CardContent>
         </Card>
 
@@ -32,8 +30,8 @@ export default function Dashboard() {
             <CheckSquare className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">23</div>
-            <p className="text-xs text-muted-foreground">5 com prazo vencido</p>
+            <div className="text-2xl font-bold">0</div>
+            <p className="text-xs text-muted-foreground">Nenhuma tarefa pendente</p>
           </CardContent>
         </Card>
 
@@ -43,8 +41,8 @@ export default function Dashboard() {
             <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">R$ 54.320</div>
-            <p className="text-xs text-muted-foreground">+8.2% vs mês anterior</p>
+            <div className="text-2xl font-bold">R$ 0</div>
+            <p className="text-xs text-muted-foreground">Aguardando dados</p>
           </CardContent>
         </Card>
 
@@ -54,8 +52,8 @@ export default function Dashboard() {
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">142</div>
-            <p className="text-xs text-muted-foreground">+3 novos esta semana</p>
+            <div className="text-2xl font-bold">0</div>
+            <p className="text-xs text-muted-foreground">Nenhum cliente cadastrado</p>
           </CardContent>
         </Card>
 
@@ -65,8 +63,8 @@ export default function Dashboard() {
             <FolderOpen className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">18</div>
-            <p className="text-xs text-muted-foreground">3 com prazo próximo</p>
+            <div className="text-2xl font-bold">0</div>
+            <p className="text-xs text-muted-foreground">Nenhum projeto ativo</p>
           </CardContent>
         </Card>
 
@@ -76,8 +74,8 @@ export default function Dashboard() {
             <AlertTriangle className="h-4 w-4 text-orange-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-orange-500">7</div>
-            <p className="text-xs text-muted-foreground">Requerem atenção</p>
+            <div className="text-2xl font-bold text-orange-500">0</div>
+            <p className="text-xs text-muted-foreground">Nenhum alerta</p>
           </CardContent>
         </Card>
       </div>
@@ -89,7 +87,12 @@ export default function Dashboard() {
             <CardTitle>Visão Geral - Últimos 6 Meses</CardTitle>
           </CardHeader>
           <CardContent className="pl-2">
-            <DashboardCharts />
+            <div className="flex items-center justify-center h-[350px] text-muted-foreground">
+              <div className="text-center">
+                <p className="text-lg font-medium">Aguardando dados</p>
+                <p className="text-sm">Os gráficos aparecerão quando houver movimentação</p>
+              </div>
+            </div>
           </CardContent>
         </Card>
 
@@ -98,7 +101,12 @@ export default function Dashboard() {
             <CardTitle>Atividades Recentes</CardTitle>
           </CardHeader>
           <CardContent>
-            <RecentActivity />
+            <div className="flex items-center justify-center h-[350px] text-muted-foreground">
+              <div className="text-center">
+                <p className="text-lg font-medium">Nenhuma atividade</p>
+                <p className="text-sm">As atividades aparecerão aqui conforme você usar o sistema</p>
+              </div>
+            </div>
           </CardContent>
         </Card>
       </div>

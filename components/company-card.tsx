@@ -1,6 +1,6 @@
 "use client"
 
-import type { Project } from "@/components/projects-page"
+import type { Company } from "@/components/companies-page"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -15,13 +15,16 @@ import {
   Pause,
   CheckCircle,
   ImageIcon,
+  Edit,
+  Plus,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-interface ProjectCardProps {
-  project: Project
-  onUpdate: (updates: Partial<Project>) => void
+interface CompanyCardProps {
+  company: Company
+  onUpdate: (updates: Partial<Company>) => void
   onDelete: () => void
+  onEdit: () => void
 }
 
 const projectTypeLabels = {
@@ -48,21 +51,35 @@ const statusLabels = {
   concluido: "Concluído",
 }
 
-export function ProjectCard({ project, onUpdate, onDelete }: ProjectCardProps) {
-  const daysSinceStart = Math.floor((new Date().getTime() - new Date(project.startDate).getTime()) / (1000 * 3600 * 24))
+export function CompanyCard({ company, onUpdate, onDelete, onEdit }: CompanyCardProps) {
+  const daysSinceStart = Math.floor((new Date().getTime() - new Date(company.startDate).getTime()) / (1000 * 3600 * 24))
 
-  const handleStatusChange = (newStatus: Project["status"]) => {
+  const handleStatusChange = (newStatus: Company["status"]) => {
     onUpdate({ status: newStatus })
+  }
+
+  const handleAddRevenue = () => {
+    // Aqui será implementada a navegação para adicionar receita
+    // Por enquanto, vamos simular um incremento
+    const newRevenue = company.revenue + 1000
+    onUpdate({ revenue: newRevenue })
+  }
+
+  const handleAddTask = () => {
+    // Aqui será implementada a navegação para adicionar tarefa
+    // Por enquanto, vamos simular um incremento
+    const newTasks = company.pendingTasks + 1
+    onUpdate({ pendingTasks: newTasks })
   }
 
   return (
     <Card className="hover:shadow-lg transition-shadow duration-200 overflow-hidden">
       {/* Cover Image */}
-      {project.coverImage ? (
+      {company.coverImage ? (
         <div className="h-32 w-full overflow-hidden">
           <img
-            src={project.coverImage || "/placeholder.svg"}
-            alt={`Capa do projeto ${project.clientName}`}
+            src={company.coverImage || "/placeholder.svg"}
+            alt={`Capa da empresa ${company.companyName}`}
             className="h-full w-full object-cover"
           />
         </div>
@@ -75,8 +92,8 @@ export function ProjectCard({ project, onUpdate, onDelete }: ProjectCardProps) {
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="space-y-1">
-            <h3 className="font-semibold text-lg">{project.clientName}</h3>
-            <p className="text-sm text-muted-foreground line-clamp-2">{project.description}</p>
+            <h3 className="font-semibold text-lg">{company.companyName}</h3>
+            <p className="text-sm text-muted-foreground line-clamp-2">{company.description}</p>
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -85,6 +102,10 @@ export function ProjectCard({ project, onUpdate, onDelete }: ProjectCardProps) {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={onEdit}>
+                <Edit className="mr-2 h-4 w-4" />
+                Editar
+              </DropdownMenuItem>
               <DropdownMenuItem onClick={() => handleStatusChange("ativo")}>
                 <Play className="mr-2 h-4 w-4" />
                 Ativar
@@ -106,11 +127,11 @@ export function ProjectCard({ project, onUpdate, onDelete }: ProjectCardProps) {
         </div>
 
         <div className="flex items-center gap-2">
-          <Badge variant="secondary" className={cn("text-xs", projectTypeColors[project.projectType])}>
-            {projectTypeLabels[project.projectType]}
+          <Badge variant="secondary" className={cn("text-xs", projectTypeColors[company.projectType])}>
+            {projectTypeLabels[company.projectType]}
           </Badge>
-          <Badge variant="secondary" className={cn("text-xs", statusColors[project.status])}>
-            {statusLabels[project.status]}
+          <Badge variant="secondary" className={cn("text-xs", statusColors[company.status])}>
+            {statusLabels[company.status]}
           </Badge>
         </div>
       </CardHeader>
@@ -119,20 +140,42 @@ export function ProjectCard({ project, onUpdate, onDelete }: ProjectCardProps) {
         {/* Métricas Principais */}
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-1">
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <DollarSign className="h-4 w-4" />
-              <span>Receita Gerada</span>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <DollarSign className="h-4 w-4" />
+                <span>Receita Gerada</span>
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-6 w-6 p-0 text-green-600 hover:bg-green-100"
+                onClick={handleAddRevenue}
+                title="Adicionar receita"
+              >
+                <Plus className="h-3 w-3" />
+              </Button>
             </div>
-            <div className="text-xl font-bold text-green-600">R$ {project.revenue.toLocaleString("pt-BR")}</div>
+            <div className="text-xl font-bold text-green-600">R$ {company.revenue.toLocaleString("pt-BR")}</div>
           </div>
 
           <div className="space-y-1">
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <CheckSquare className="h-4 w-4" />
-              <span>Tarefas Pendentes</span>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <CheckSquare className="h-4 w-4" />
+                <span>Tarefas Pendentes</span>
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-6 w-6 p-0 text-orange-600 hover:bg-orange-100"
+                onClick={handleAddTask}
+                title="Adicionar tarefa"
+              >
+                <Plus className="h-3 w-3" />
+              </Button>
             </div>
-            <div className={cn("text-xl font-bold", project.pendingTasks > 0 ? "text-orange-600" : "text-green-600")}>
-              {project.pendingTasks}
+            <div className={cn("text-xl font-bold", company.pendingTasks > 0 ? "text-orange-600" : "text-green-600")}>
+              {company.pendingTasks}
             </div>
           </div>
         </div>
@@ -144,36 +187,36 @@ export function ProjectCard({ project, onUpdate, onDelete }: ProjectCardProps) {
               <Calendar className="h-4 w-4" />
               <span>Data de Início</span>
             </div>
-            <span className="font-medium">{new Date(project.startDate).toLocaleDateString("pt-BR")}</span>
+            <span className="font-medium">{new Date(company.startDate).toLocaleDateString("pt-BR")}</span>
           </div>
 
           <div className="flex items-center justify-between text-sm">
-            <span className="text-muted-foreground">Tempo de Projeto</span>
+            <span className="text-muted-foreground">Tempo de Parceria</span>
             <span className="font-medium">{daysSinceStart} dias</span>
           </div>
 
           <div className="flex items-center justify-between text-sm">
             <span className="text-muted-foreground">Última Atualização</span>
-            <span className="font-medium">{new Date(project.lastUpdate).toLocaleDateString("pt-BR")}</span>
+            <span className="font-medium">{new Date(company.lastUpdate).toLocaleDateString("pt-BR")}</span>
           </div>
         </div>
 
         {/* Barra de Progresso Visual */}
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">Status do Projeto</span>
-            <span className="font-medium">{statusLabels[project.status]}</span>
+            <span className="text-muted-foreground">Status da Empresa</span>
+            <span className="font-medium">{statusLabels[company.status]}</span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div
               className={cn(
                 "h-2 rounded-full transition-all duration-300",
-                project.status === "ativo" && "bg-blue-500",
-                project.status === "pausado" && "bg-yellow-500",
-                project.status === "concluido" && "bg-green-500",
+                company.status === "ativo" && "bg-blue-500",
+                company.status === "pausado" && "bg-yellow-500",
+                company.status === "concluido" && "bg-green-500",
               )}
               style={{
-                width: project.status === "concluido" ? "100%" : project.status === "ativo" ? "60%" : "30%",
+                width: company.status === "concluido" ? "100%" : company.status === "ativo" ? "60%" : "30%",
               }}
             />
           </div>

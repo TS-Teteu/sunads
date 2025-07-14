@@ -46,67 +46,9 @@ interface Revenue {
   createdAt: string
 }
 
-const initialExpenses: Expense[] = [
-  {
-    id: "exp1",
-    date: "2024-01-15",
-    description: "Aluguel do escritório",
-    amount: 3500.0,
-    paymentMethod: "transferencia",
-    createdAt: "2024-01-15",
-  },
-  {
-    id: "exp2",
-    date: "2024-01-10",
-    description: "Material de escritório",
-    amount: 450.75,
-    paymentMethod: "cartao-credito",
-    createdAt: "2024-01-10",
-  },
-  {
-    id: "exp3",
-    date: "2024-01-08",
-    description: "Software de design",
-    amount: 299.9,
-    paymentMethod: "pix",
-    createdAt: "2024-01-08",
-  },
-  {
-    id: "exp4",
-    date: "2024-01-05",
-    description: "Combustível",
-    amount: 180.0,
-    paymentMethod: "cartao-debito",
-    createdAt: "2024-01-05",
-  },
-]
+const initialExpenses: Expense[] = []
 
-const initialRevenues: Revenue[] = [
-  {
-    id: "rev1",
-    date: "2024-01-20",
-    description: "Pagamento Projeto ABC",
-    amount: 12000.0,
-    source: "servico",
-    createdAt: "2024-01-20",
-  },
-  {
-    id: "rev2",
-    date: "2024-01-18",
-    description: "Consultoria de Marketing",
-    amount: 2500.0,
-    source: "servico",
-    createdAt: "2024-01-18",
-  },
-  {
-    id: "rev3",
-    date: "2024-01-12",
-    description: "Rendimento de Investimento",
-    amount: 500.0,
-    source: "investimento",
-    createdAt: "2024-01-12",
-  },
-]
+const initialRevenues: Revenue[] = []
 
 const paymentMethodLabels = {
   dinheiro: "Dinheiro",
@@ -126,14 +68,14 @@ const bankAccounts: BankAccount[] = [
   {
     id: "interpj",
     name: "InterPJ",
-    balance: 125430.5,
+    balance: 0,
     url: "https://internetbanking.bancointer.com.br/",
     color: "bg-orange-500",
   },
   {
     id: "asaas",
     name: "Asaas",
-    balance: 87650.25,
+    balance: 0,
     url: "https://www.asaas.com/",
     color: "bg-blue-500",
   },

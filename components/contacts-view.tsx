@@ -20,62 +20,7 @@ export interface Contact {
   createdAt: string
 }
 
-const initialContacts: Contact[] = [
-  {
-    id: "c1",
-    name: "João Silva",
-    companyName: "ABC Marketing",
-    phone: "(11) 98765-4321",
-    origin: "Indicação",
-    projectType: "gestao-trafego",
-    createdAt: "2023-05-10",
-  },
-  {
-    id: "c2",
-    name: "Maria Santos",
-    companyName: "Tech Solutions",
-    phone: "(21) 99876-5432",
-    origin: "Website",
-    projectType: "criacao-ia",
-    createdAt: "2023-06-20",
-  },
-  {
-    id: "c3",
-    name: "Pedro Costa",
-    companyName: "Loja Virtual Plus",
-    phone: "(31) 97654-3210",
-    origin: "Evento",
-    projectType: "gestao-trafego",
-    createdAt: "2023-07-01",
-  },
-  {
-    id: "c4",
-    name: "Ana Lima",
-    companyName: "Consultoria Empresarial",
-    phone: "(41) 96543-2109",
-    origin: "Website",
-    projectType: "criacao-ia",
-    createdAt: "2023-08-15",
-  },
-  {
-    id: "c5",
-    name: "Carlos Mendes",
-    companyName: "Restaurante Gourmet",
-    phone: "(51) 95432-1098",
-    origin: "Indicação",
-    projectType: "outros",
-    createdAt: "2023-09-05",
-  },
-  {
-    id: "c6",
-    name: "Fernanda Oliveira",
-    companyName: "Clínica Médica Vida",
-    phone: "(61) 94321-0987",
-    origin: "Website",
-    projectType: "criacao-ia",
-    createdAt: "2023-10-12",
-  },
-]
+const initialContacts: Contact[] = []
 
 const projectTypeLabels = {
   "gestao-trafego": "Gestão de Tráfego",

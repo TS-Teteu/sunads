@@ -33,67 +33,7 @@ export interface Conversation {
   createdAt: string
 }
 
-const mockConversations: Conversation[] = [
-  {
-    id: "1",
-    contact: {
-      name: "João Silva",
-      email: "joao@email.com",
-      phone: "+55 11 99999-9999",
-    },
-    status: "open",
-    priority: "high",
-    assignee: "Maria Santos",
-    lastMessage: {
-      content: "Preciso de ajuda com o projeto de tráfego pago",
-      timestamp: "2024-01-12T10:30:00Z",
-      sender: "customer",
-    },
-    unreadCount: 3,
-    tags: ["gestao-trafego", "urgente"],
-    source: "whatsapp",
-    createdAt: "2024-01-12T09:00:00Z",
-  },
-  {
-    id: "2",
-    contact: {
-      name: "Ana Costa",
-      email: "ana@techsolutions.com",
-      phone: "+55 11 88888-8888",
-    },
-    status: "pending",
-    priority: "medium",
-    assignee: "Pedro Lima",
-    lastMessage: {
-      content: "Quando podemos agendar uma reunião?",
-      timestamp: "2024-01-12T09:15:00Z",
-      sender: "customer",
-    },
-    unreadCount: 1,
-    tags: ["criacao-ia", "reuniao"],
-    source: "website",
-    createdAt: "2024-01-12T08:30:00Z",
-  },
-  {
-    id: "3",
-    contact: {
-      name: "Carlos Mendes",
-      email: "carlos@loja.com",
-    },
-    status: "resolved",
-    priority: "low",
-    assignee: "João Silva",
-    lastMessage: {
-      content: "Obrigado pela ajuda! Problema resolvido.",
-      timestamp: "2024-01-11T16:45:00Z",
-      sender: "customer",
-    },
-    unreadCount: 0,
-    tags: ["suporte", "resolvido"],
-    source: "email",
-    createdAt: "2024-01-11T14:00:00Z",
-  },
-]
+const mockConversations: Conversation[] = []
 
 export default function ConversationsPage() {
   const [conversations, setConversations] = useState<Conversation[]>(mockConversations)

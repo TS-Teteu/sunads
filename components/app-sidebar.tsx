@@ -1,6 +1,6 @@
 "use client"
 
-import { BarChart, DollarSign, CheckSquare, TrendingUp, Users, FolderOpen, Home, Megaphone, Bell } from "lucide-react"
+import { BarChart, DollarSign, CheckSquare, TrendingUp, Users, Building2, Home, Megaphone, Bell } from "lucide-react"
 import {
   Sidebar,
   SidebarContent,
@@ -19,7 +19,7 @@ const menuItems = [
   { title: "Tarefas", icon: CheckSquare, url: "/tarefas" },
   { title: "Comercial", icon: TrendingUp, url: "/comercial" },
   { title: "Clientes", icon: Users, url: "/clientes" },
-  { title: "Projetos", icon: FolderOpen, url: "/projetos" },
+  { title: "Empresas", icon: Building2, url: "/empresas" }, // Alterado de Projetos para Empresas
   { title: "Contas", icon: Megaphone, url: "/contas" },
   { title: "Avisos", icon: Bell, url: "/avisos" },
 ]

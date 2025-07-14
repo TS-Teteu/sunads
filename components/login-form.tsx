@@ -19,6 +19,11 @@ export function LoginForm() {
 
     const formData = new FormData(event.currentTarget)
     const result = await login(formData)
+    // Se a ação não retornar nada, mostramos um erro genérico
+    if (!result) {
+      setError("Falha ao efetuar login. Tente novamente.")
+      return
+    }
 
     if (result.error) {
       setError(result.error)

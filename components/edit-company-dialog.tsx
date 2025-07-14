@@ -1,8 +1,8 @@
 "use client"
 
 import type React from "react"
-import { useState, useRef } from "react"
-import type { Project } from "@/components/projects-page"
+import { useState, useRef, useEffect } from "react"
+import type { Company } from "@/components/companies-page"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -11,47 +11,50 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Upload, X, ImageIcon } from "lucide-react"
 
-interface AddProjectDialogProps {
+interface EditCompanyDialogProps {
+  company: Company
   open: boolean
   onOpenChange: (open: boolean) => void
-  onAddProject: (project: Omit<Project, "id" | "lastUpdate">) => void
+  onUpdateCompany: (updates: Partial<Company>) => void
 }
 
-export function AddProjectDialog({ open, onOpenChange, onAddProject }: AddProjectDialogProps) {
+export function EditCompanyDialog({ company, open, onOpenChange, onUpdateCompany }: EditCompanyDialogProps) {
   const [formData, setFormData] = useState({
-    clientName: "",
+    companyName: "",
     startDate: "",
     revenue: 0,
     pendingTasks: 0,
-    projectType: "gestao-trafego" as Project["projectType"],
-    status: "ativo" as Project["status"],
+    projectType: "gestao-trafego" as Company["projectType"],
+    status: "ativo" as Company["status"],
     description: "",
     coverImage: "",
   })
 
   const fileInputRef = useRef<HTMLInputElement>(null)
 
+  useEffect(() => {
+    if (company) {
+      setFormData({
+        companyName: company.companyName,
+        startDate: company.startDate,
+        revenue: company.revenue,
+        pendingTasks: company.pendingTasks,
+        projectType: company.projectType,
+        status: company.status,
+        description: company.description,
+        coverImage: company.coverImage || "",
+      })
+    }
+  }, [company])
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (!formData.clientName || !formData.startDate) {
+    if (!formData.companyName || !formData.startDate) {
       return
     }
 
-    onAddProject(formData)
-
-    // Reset form
-    setFormData({
-      clientName: "",
-      startDate: "",
-      revenue: 0,
-      pendingTasks: 0,
-      projectType: "gestao-trafego",
-      status: "ativo",
-      description: "",
-      coverImage: "",
-    })
-
+    onUpdateCompany(formData)
     onOpenChange(false)
   }
 
@@ -82,19 +85,19 @@ export function AddProjectDialog({ open, onOpenChange, onAddProject }: AddProjec
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Novo Projeto</DialogTitle>
+          <DialogTitle>Editar Empresa</DialogTitle>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Cover Image Upload */}
           <div className="space-y-2">
-            <Label>Foto de Capa do Projeto</Label>
+            <Label>Foto de Capa da Empresa</Label>
             <div className="border-2 border-dashed border-gray-300 rounded-lg p-4">
               {formData.coverImage ? (
                 <div className="relative">
                   <img
                     src={formData.coverImage || "/placeholder.svg"}
-                    alt="Capa do projeto"
+                    alt="Capa da empresa"
                     className="w-full h-32 object-cover rounded-lg"
                   />
                   <Button
@@ -124,30 +127,30 @@ export function AddProjectDialog({ open, onOpenChange, onAddProject }: AddProjec
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="clientName">Nome do Cliente *</Label>
+            <Label htmlFor="companyName">Nome da Empresa *</Label>
             <Input
-              id="clientName"
-              value={formData.clientName}
-              onChange={(e) => handleChange("clientName", e.target.value)}
-              placeholder="Digite o nome do cliente"
+              id="companyName"
+              value={formData.companyName}
+              onChange={(e) => handleChange("companyName", e.target.value)}
+              placeholder="Digite o nome da empresa"
               required
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="description">Descrição do Projeto</Label>
+            <Label htmlFor="description">Descrição dos Serviços</Label>
             <Textarea
               id="description"
               value={formData.description}
               onChange={(e) => handleChange("description", e.target.value)}
-              placeholder="Descreva o projeto"
+              placeholder="Descreva os serviços prestados para esta empresa"
               rows={3}
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="projectType">Tipo de Projeto</Label>
+              <Label htmlFor="projectType">Tipo de Serviço</Label>
               <Select value={formData.projectType} onValueChange={(value) => handleChange("projectType", value)}>
                 <SelectTrigger>
                   <SelectValue />
@@ -202,7 +205,7 @@ export function AddProjectDialog({ open, onOpenChange, onAddProject }: AddProjec
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="startDate">Data de Início *</Label>
+            <Label htmlFor="startDate">Data de Início da Parceria *</Label>
             <Input
               id="startDate"
               type="date"
@@ -216,7 +219,7 @@ export function AddProjectDialog({ open, onOpenChange, onAddProject }: AddProjec
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
               Cancelar
             </Button>
-            <Button type="submit">Criar Projeto</Button>
+            <Button type="submit">Salvar Alterações</Button>
           </div>
         </form>
       </DialogContent>

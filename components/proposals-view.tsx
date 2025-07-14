@@ -22,63 +22,7 @@ export interface Proposal {
   createdAt: string
 }
 
-const initialProposals: Proposal[] = [
-  {
-    id: "p1",
-    companyName: "ABC Marketing",
-    responsible: "João Silva",
-    proposalType: "Gestão de Tráfego",
-    value: 15000.0,
-    proposalDate: "2024-01-05",
-    category: "A",
-    status: "enviada",
-    createdAt: "2024-01-01",
-  },
-  {
-    id: "p2",
-    companyName: "Tech Solutions",
-    responsible: "Maria Santos",
-    proposalType: "Criação de Chatbot IA",
-    value: 45000.0,
-    proposalDate: "2024-01-10",
-    category: "B",
-    status: "enviada",
-    createdAt: "2024-01-08",
-  },
-  {
-    id: "p3",
-    companyName: "Loja Virtual Plus",
-    responsible: "Pedro Costa",
-    proposalType: "Otimização de Conversão",
-    value: 8000.0,
-    proposalDate: "2023-12-20",
-    category: "A",
-    status: "aprovada",
-    createdAt: "2023-12-15",
-  },
-  {
-    id: "p4",
-    companyName: "Consultoria Empresarial",
-    responsible: "Ana Lima",
-    proposalType: "Sistema de Análise de Dados",
-    value: 95000.0,
-    proposalDate: "2024-01-15",
-    category: "B",
-    status: "rascunho",
-    createdAt: "2024-01-14",
-  },
-  {
-    id: "p5",
-    companyName: "Restaurante Gourmet",
-    responsible: "Carlos Mendes",
-    proposalType: "Campanha de Redes Sociais",
-    value: 7000.0,
-    proposalDate: "2023-11-01",
-    category: "A",
-    status: "rejeitada",
-    createdAt: "2023-10-28",
-  },
-]
+const initialProposals: Proposal[] = []
 
 const categoryColors = {
   A: "bg-blue-100 text-blue-800",

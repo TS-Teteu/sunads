@@ -21,63 +21,7 @@ export interface Deal {
   reasonForLoss?: "Cliente achou caro" | "Fechou com concorrente" | "Desistiu" | "Outros"
 }
 
-const initialDeals: Deal[] = [
-  {
-    id: "deal-1",
-    title: "Projeto de SEO para E-commerce",
-    clientName: "Loja Online X",
-    value: 15000.0,
-    stage: "qualificacao",
-    expectedCloseDate: "2024-02-20",
-    createdAt: "2024-01-10",
-  },
-  {
-    id: "deal-2",
-    title: "Desenvolvimento de App Mobile",
-    clientName: "Startup Inovadora",
-    value: 45000.0,
-    stage: "qualificacao",
-    expectedCloseDate: "2024-02-28",
-    createdAt: "2024-01-15",
-  },
-  {
-    id: "deal-3",
-    title: "Campanha de Google Ads",
-    clientName: "Agência Digital Alpha",
-    value: 8000.0,
-    stage: "negociacao",
-    expectedCloseDate: "2024-02-18",
-    createdAt: "2024-01-18",
-  },
-  {
-    id: "deal-4",
-    title: "Consultoria de Marketing Digital",
-    clientName: "Empresa Crescer",
-    value: 25000.0,
-    stage: "qualificacao",
-    expectedCloseDate: "2024-03-05",
-    createdAt: "2024-01-20",
-  },
-  {
-    id: "deal-5",
-    title: "Sistema CRM Personalizado",
-    clientName: "Grandes Negócios S.A.",
-    value: 120000.0,
-    stage: "fechado", // Atualizado
-    expectedCloseDate: "2024-01-30",
-    createdAt: "2024-01-01",
-  },
-  {
-    id: "deal-6",
-    title: "Otimização de Conversão",
-    clientName: "Pequenos Empreendedores",
-    value: 7000.0,
-    stage: "perdido", // Atualizado
-    expectedCloseDate: "2024-01-25",
-    createdAt: "2024-01-05",
-    reasonForLoss: "Cliente achou caro",
-  },
-]
+const initialDeals: Deal[] = []
 
 export default function CommercialPage() {
   const [activeTab, setActiveTab] = useState("dashboard")

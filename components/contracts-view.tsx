@@ -22,51 +22,7 @@ export interface Contract {
   createdAt: string
 }
 
-const initialContracts: Contract[] = [
-  {
-    id: "con1",
-    companyName: "ABC Marketing",
-    responsible: "João Silva",
-    value: 18000.0,
-    startDate: "2024-01-01",
-    endDate: "2024-12-31",
-    status: "ativo",
-    attachmentUrl: "/placeholder.pdf", // Exemplo de URL de anexo
-    createdAt: "2023-12-28",
-  },
-  {
-    id: "con2",
-    companyName: "Tech Solutions",
-    responsible: "Maria Santos",
-    value: 55000.0,
-    startDate: "2023-10-15",
-    endDate: "2024-10-14",
-    status: "ativo",
-    attachmentUrl: "/placeholder.pdf",
-    createdAt: "2023-10-10",
-  },
-  {
-    id: "con3",
-    companyName: "Loja Virtual Plus",
-    responsible: "Pedro Costa",
-    value: 9000.0,
-    startDate: "2023-01-01",
-    endDate: "2023-12-31",
-    status: "expirado",
-    attachmentUrl: "/placeholder.pdf",
-    createdAt: "2022-12-25",
-  },
-  {
-    id: "con4",
-    companyName: "Consultoria Empresarial",
-    responsible: "Ana Lima",
-    value: 100000.0,
-    startDate: "2024-02-01",
-    endDate: "2025-01-31",
-    status: "ativo",
-    createdAt: "2024-01-28",
-  },
-]
+const initialContracts: Contract[] = []
 
 const statusColors = {
   ativo: "bg-green-100 text-green-800",

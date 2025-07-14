@@ -26,19 +26,19 @@ export function CommercialDashboard({ deals }: CommercialDashboardProps) {
   const totalLostValue = deals.filter((deal) => deal.stage === "perdido").reduce((sum, deal) => sum + deal.value, 0)
 
   const dashboardData = {
-    propostasEnviadas: 302,
-    ticketMedio: 61407.03,
-    vendaMenorValor: 607.1,
-    vendaMaiorValor: 536187.13,
+    propostasEnviadas: 0,
+    ticketMedio: 0,
+    vendaMenorValor: 0,
+    vendaMaiorValor: 0,
     metaMensal: {
       valor: 0.0,
-      meta: 125000.0,
-      novaReceita: 108292.41,
+      meta: 0.0,
+      novaReceita: 0,
     },
     metaAnual: {
-      valor: 2126241.86,
-      meta: 1500000.0,
-      percentual: 141.75,
+      valor: 0,
+      meta: 0,
+      percentual: 0,
     },
   }
 
