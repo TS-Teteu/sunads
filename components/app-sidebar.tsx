@@ -1,71 +1,71 @@
 "use client"
 
-import { BarChart, DollarSign, CheckSquare, TrendingUp, Users, Building2, Home, Megaphone, Bell } from "lucide-react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { cn } from "@/lib/utils"
 import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarMenuButton,
-} from "@/components/ui/sidebar"
-
-const menuItems = [
-  { title: "Dashboard", icon: Home, url: "/" },
-  { title: "Financeiro", icon: DollarSign, url: "/financeiro" },
-  { title: "Tarefas", icon: CheckSquare, url: "/tarefas" },
-  { title: "Comercial", icon: TrendingUp, url: "/comercial" },
-  { title: "Clientes", icon: Users, url: "/clientes" },
-  { title: "Empresas", icon: Building2, url: "/empresas" }, // Alterado de Projetos para Empresas
-  { title: "Contas", icon: Megaphone, url: "/contas" },
-  { title: "Avisos", icon: Bell, url: "/avisos" },
-]
+  Home,
+  CheckSquare,
+  MessageSquare,
+  TrendingUp,
+  Users,
+  DollarSign,
+  Bell,
+  Megaphone,
+  Building2,
+} from "lucide-react"
+import { LogoutButton } from "./logout-button"
 
 export function AppSidebar() {
-  return (
-    <Sidebar
-      collapsible="icon"
-      className="group/sidebar transition-all duration-300 ease-in-out hover:w-64 data-[state=collapsed]:w-16"
-    >
-      <SidebarHeader className="flex items-center px-4 py-3 border-b group-hover/sidebar:px-4 group-data-[state=collapsed]/sidebar:px-2 transition-all duration-300">
-        <div className="flex items-center gap-2 min-w-0">
-          <BarChart className="h-6 w-6 text-blue-600 flex-shrink-0" />
-          <h2 className="text-lg font-semibold truncate group-data-[state=collapsed]/sidebar:opacity-0 group-data-[state=collapsed]/sidebar:w-0 group-hover/sidebar:opacity-100 group-hover/sidebar:w-auto transition-all duration-300">
-            Sun Ads
-          </h2>
-        </div>
-      </SidebarHeader>
+  const pathname = usePathname()
 
-      <SidebarContent className="px-2 py-4">
-        <SidebarGroup>
-          <SidebarGroupLabel className="group-data-[state=collapsed]/sidebar:opacity-0 group-hover/sidebar:opacity-100 transition-opacity duration-300">
-            Navegação
-          </SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu className="space-y-1">
-              {menuItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton
-                    asChild
-                    tooltip={item.title}
-                    className="group/menu-item relative flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-accent transition-all duration-200 min-h-[44px]"
-                  >
-                    <a href={item.url}>
-                      <item.icon className="h-5 w-5 flex-shrink-0" />
-                      <span className="truncate group-data-[state=collapsed]/sidebar:opacity-0 group-data-[state=collapsed]/sidebar:w-0 group-hover/sidebar:opacity-100 group-hover/sidebar:w-auto transition-all duration-300 delay-75">
-                        {item.title}
-                      </span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
-    </Sidebar>
+  const navItems = [
+    { href: "/", icon: Home, label: "Dashboard" },
+    { href: "/tarefas", icon: CheckSquare, label: "Tarefas" },
+    { href: "/empresas", icon: Building2, label: "Empresas" }, // Atualizado para Empresas
+    { href: "/conversas", icon: MessageSquare, label: "Conversas" },
+    { href: "/comercial", icon: TrendingUp, label: "Comercial" },
+    { href: "/clientes", icon: Users, label: "Contatos" }, // Mantido como Contatos
+    { href: "/financeiro", icon: DollarSign, label: "Financeiro" },
+    { href: "/contas", icon: Megaphone, label: "Contas" },
+    { href: "/avisos", icon: Bell, label: "Avisos" },
+  ]
+
+  return (
+    <div className="hidden border-r bg-muted/40 md:block">
+      <div className="flex h-full max-h-screen flex-col gap-2">
+        <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
+          <Link href="/" className="flex items-center gap-2 font-semibold">
+            <div className="flex items-center justify-center h-8 w-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 shadow-lg">
+              <span className="font-bold text-white text-lg">S</span>
+            </div>
+            <span className="text-lg bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-700">
+              Sun Ads
+            </span>
+          </Link>
+        </div>
+        <div className="flex-1">
+          <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
+            <div className="text-xs font-semibold text-muted-foreground px-3 py-2">NAVEGAÇÃO</div>
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary",
+                  pathname === item.href && "bg-muted text-primary",
+                )}
+              >
+                <item.icon className="h-4 w-4" />
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+        <div className="mt-auto p-4">
+          <LogoutButton />
+        </div>
+      </div>
+    </div>
   )
 }

@@ -6,8 +6,13 @@ import { cookies } from "next/headers"
 import type { SessionData } from "@/lib/session"
 import { sessionOptions } from "@/lib/session"
 
-export async function login(formData: FormData) {
+export async function login(_: unknown, formData?: FormData) {
   const session = await getIronSession<SessionData>(cookies(), sessionOptions)
+
+  // Garantia de que formData existe
+  if (!formData) {
+    return { error: "Dados do formulário ausentes." }
+  }
 
   const email = formData.get("email") as string
   const password = formData.get("password") as string
